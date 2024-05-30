@@ -31,7 +31,7 @@ function TodoForm({ initialFormData, handleSave }) {
     handleSave(formData);
 
     // TODO: determine how to clear form after handleSave is called
-    setFormData();
+    setFormData({ name: "", description: ""});
   }
 
   return (
