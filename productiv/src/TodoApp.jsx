@@ -15,12 +15,13 @@ import TopTodo from "./TopTodo.jsx";
  * App -> TodoApp -> { TodoForm, EditableTodoList }
  */
 
-function TodoApp() {
+function TodoApp({ initialTodos }) {
+  const [todos, setTodos] = useState(initialTodos);
 
   /** add a new todo to list */
-  function create(newTodo) {
-    let newTodo = { ...item, id: uuid() }; // NOTE: check how to attach Todo- to id
-    setTodos(todo => [...items, newTodo]);
+  function create(todo) {
+    let newTodo = { ...todo, id: `Todo-${uuid()}` };
+    setTodos(todos => [...todos, newTodo]);
   }
 
   /** update a todo with updatedTodo */
@@ -44,7 +45,7 @@ function TodoApp() {
           (if no top todo, omit this whole section)
           <section className="mb-4">
             <h3>Top Todo</h3>
-            <TopTodo />
+            <TopTodo todos={todos}/>
           </section>
 
           <section>
