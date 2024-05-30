@@ -10,7 +10,7 @@ import EditableTodo from "./EditableTodo.jsx";
  * TodoApp -> EditableTodoList -> [ EditableTodo, ... ]
  */
 
-function EditableTodoList() {
+function EditableTodoList({ todos, update, remove }) {
   return (
       <div>
         {/*   FIXME  */}
