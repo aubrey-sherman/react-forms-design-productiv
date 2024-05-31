@@ -12,12 +12,11 @@ import EditableTodo from "./EditableTodo.jsx";
 
 function EditableTodoList({ todos, update, remove }) {
   return (
-      <div>
-        {/*   FIXME  */}
-        <EditableTodo />
-        <EditableTodo />
-        <EditableTodo />
-      </div>
+    <div>
+      {todos.map(todo =>
+        <EditableTodo todo={todo} update={update} remove={remove} />
+      )}
+    </div>
   );
 }
 
