@@ -23,7 +23,7 @@ function TodoForm({ initialFormData, handleSave }) {
     const value = evt.target.value;
 
     setFormData(currData => {
-      currData[fieldData] = value;
+      currData[fieldName] = value;
       return { ...currData };
     });
   }
@@ -32,7 +32,7 @@ function TodoForm({ initialFormData, handleSave }) {
   function handleSubmit(evt) {
     evt.preventDefault();
     handleSave(formData);
-    setFormData({ name: "", description: "" });
+    setFormData({ title: "", description: "" });
   }
 
   return (
@@ -44,7 +44,7 @@ function TodoForm({ initialFormData, handleSave }) {
           className="form-control"
           placeholder="Title"
           onChange={handleChange}
-          value={initialFormData.name || ""}
+          value={initialFormData?.title || ""}
           aria-label="Title"
         />
       </div>
@@ -55,7 +55,7 @@ function TodoForm({ initialFormData, handleSave }) {
           className="form-control TodoForm-description"
           placeholder="Description"
           onChange={handleChange}
-          value={initialFormData.description || ""}
+          value={initialFormData?.description || ""}
           aria-label="Description"
         />
       </div>
@@ -67,7 +67,7 @@ function TodoForm({ initialFormData, handleSave }) {
           </label>
           <select id="TodoForm-priority"
             name="priority"
-            value={initialFormData.priority || ""}
+            value={initialFormData?.priority || ""}
             onChange={handleChange}
             className=
             "form-control form-control-sm d-inline-flex TodoForm-priority"
