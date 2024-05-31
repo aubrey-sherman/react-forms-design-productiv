@@ -17,7 +17,7 @@ import TopTodo from "./TopTodo.jsx";
 
 function TodoApp({ initialTodos }) {
   const [todos, setTodos] = useState(initialTodos);
-  console.log("todos=", todos);
+  // console.log("todos=", todos);
 
   /** add a new todo to list */
   function create(todo) {
@@ -27,21 +27,29 @@ function TodoApp({ initialTodos }) {
 
   /** update a todo with updatedTodo */
   function update(updatedTodo) {
-    // {id, title, description, priority }
-    const updatedTodoList = todos.map(todo => {
-      if (todo.id === updatedTodo.id) {
-        todo.title = updatedTodo.title;
-        todo.description = updatedTodo.description;
-        todo.priority = updatedTodo.priority;
+    setTodos(
+      curr => {
+        const updatedTodoList = curr.map(todo => {
+          if (todo.id === updatedTodo.id) {
+            todo.title = updatedTodo.title;
+            todo.description = updatedTodo.description;
+            todo.priority = updatedTodo.priority;
+          }
+          return todo;
+        });
+        return updatedTodoList;
       }
-    });
-    setTodos(updatedTodoList);
+    );
   }
 
   /** delete a todo by id */
   function remove(id) {
-    let updatedTodoList = todos.filter(todo => todo.id !== id);
-    setTodos(updatedTodoList);
+    setTodos(
+      curr => {
+        const updatedTodoList = curr.filter(todo => todo.id !== id);
+        return updatedTodoList;
+      }
+    );
   }
 
   return (
@@ -56,14 +64,14 @@ function TodoApp({ initialTodos }) {
         </div>
 
         <div className="col-md-6">
-          {
-            todos.length > 0 && (
-              <section className="mb-4">
-                <h3>Top Todo</h3>
-                <TopTodo todos={todos} />
-              </section>
-            )
-          }
+          <section className="mb-4">
+            <h3>Top Todo</h3>
+            {todos.length > 0
+              ? <TopTodo todos={todos} />
+              : <span className="text-muted">No top todo yet!</span>
+            }
+          </section>
+
 
           <section>
             <h3 className="mb-3">Add Nü</h3>
