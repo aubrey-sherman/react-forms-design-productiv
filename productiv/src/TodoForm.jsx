@@ -12,18 +12,23 @@ import { useState } from "react";
  *
  * { TodoApp, EditableTodo } -> TodoForm
  */
-
+// FIXME: Not being passed initialFormData, so undefined here or default on line 60
 function TodoForm({ initialFormData, handleSave }) {
 
   const [formData, setFormData] = useState(initialFormData);
+  console.log("formData=", formData);
 
   /** Update form input. */
   function handleChange(evt) {
     const fieldName = evt.target.name;
+    console.log("fieldName=", fieldName);
     const value = evt.target.value;
+    console.log("value=", value);
 
     setFormData(currData => {
       currData[fieldName] = value;
+      // console.log(currData[fieldName]);
+      // console.log("currData=", currData);
       return { ...currData };
     });
   }
@@ -44,7 +49,7 @@ function TodoForm({ initialFormData, handleSave }) {
           className="form-control"
           placeholder="Title"
           onChange={handleChange}
-          value={initialFormData?.title || ""}
+          value={formData.title || ""}
           aria-label="Title"
         />
       </div>
