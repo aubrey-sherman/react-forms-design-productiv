@@ -17,8 +17,8 @@ import TodoForm from "./TodoForm.jsx";
 
 function EditableTodo({ todo, update, remove }) {
   const [isEditing, setIsEditing] = useState(false);
-  console.log("isEditing=", isEditing);
-  console.log("todo=", todo);
+  // console.log("isEditing=", isEditing);
+  // console.log("todo=", todo);
 
   /** Toggle if this is being edited */
   function toggleEdit() {
@@ -34,10 +34,9 @@ function EditableTodo({ todo, update, remove }) {
   function handleSave(formData) {
     const updatedTodo = { id: todo.id, ...formData };
     update(updatedTodo);
+    isEditing = false;
   }
 
-  // NOTE: Refactoring opp: options could be put in funcs for readability
-  //FIXME: todo data not displaying properly, edit not working properly
   return (
     <div className="EditableTodo">
       {isEditing
