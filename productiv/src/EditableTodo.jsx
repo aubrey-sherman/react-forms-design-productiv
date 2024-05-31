@@ -9,6 +9,9 @@ import TodoForm from "./TodoForm.jsx";
  * - update(): fn to call to update a todo
  * - remove(): fn to call to remove a todo
  *
+ * State
+ *  - isEditing: boolean
+ *
  * EditableTodoList -> EditableTodo -> { Todo, TodoForm }
  */
 
@@ -29,35 +32,32 @@ function EditableTodo({ todo, update, remove }) {
   function handleSave(formData) {
     const updatedTodo = formData;
     update(updatedTodo);
-
   }
 
   return (
-      <div className="EditableTodo">
-
-                EITHER
-
-                <TodoForm />
-
-                OR
-
-                <div className="mb-3">
-                  <div className="float-end text-sm-end">
-                    <button
-                        className="EditableTodo-toggle btn-link btn btn-sm"
-                        onClick={toggleEdit}>
-                      Edit
-                    </button>
-                    <button
-                        className="EditableTodo-delBtn btn-link btn btn-sm text-danger"
-                        onClick={handleDelete}>
-                      Del
-                    </button>
-                  </div>
-                  <Todo />
-                </div>
-
+    <div className="EditableTodo">
+      // NOTE: Two options could be pulled up into functions for readability
+      (isEditing
+      ? <TodoForm />
+      :(
+      <div className="mb-3">
+        <div className="float-end text-sm-end">
+          <button
+            className="EditableTodo-toggle btn-link btn btn-sm"
+            onClick={toggleEdit}>
+            Edit
+          </button>
+          <button
+            className="EditableTodo-delBtn btn-link btn btn-sm text-danger"
+            onClick={handleDelete}>
+            Del
+          </button>
+        </div>
+        <Todo />
       </div>
+      )
+      )
+    </div>
   );
 }
 
