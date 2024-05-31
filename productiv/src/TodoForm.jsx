@@ -7,6 +7,9 @@ import { useState } from "react";
  * - initialFormData
  * - handleSave: function to call in parent.
  *
+ * State:
+ * - formData
+ *
  * { TodoApp, EditableTodo } -> TodoForm
  */
 
@@ -29,9 +32,7 @@ function TodoForm({ initialFormData, handleSave }) {
   function handleSubmit(evt) {
     evt.preventDefault();
     handleSave(formData);
-
-    // TODO: determine how to clear form after handleSave is called
-    setFormData({ name: "", description: ""});
+    setFormData({ name: "", description: "" });
   }
 
   return (
@@ -43,7 +44,7 @@ function TodoForm({ initialFormData, handleSave }) {
           className="form-control"
           placeholder="Title"
           onChange={handleChange}
-          value="FIXME"
+          value={initialFormData.name || ""}
           aria-label="Title"
         />
       </div>
@@ -54,7 +55,7 @@ function TodoForm({ initialFormData, handleSave }) {
           className="form-control TodoForm-description"
           placeholder="Description"
           onChange={handleChange}
-          value="FIXME"
+          value={initialFormData.description || ""}
           aria-label="Description"
         />
       </div>
@@ -66,7 +67,7 @@ function TodoForm({ initialFormData, handleSave }) {
           </label>
           <select id="TodoForm-priority"
             name="priority"
-            value="FIXME"
+            value={initialFormData.priority || ""}
             onChange={handleChange}
             className=
             "form-control form-control-sm d-inline-flex TodoForm-priority"
