@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+const DEFAULT_INITIAL_DATA = {title: "", description: "", priority: 1}
+
 
 /** Form for adding.
  *
@@ -12,18 +14,18 @@ import { useState } from "react";
  *
  * { TodoApp, EditableTodo } -> TodoForm
  */
-// FIXME: Not being passed initialFormData, so undefined here or default on line 60
-function TodoForm({ initialFormData, handleSave }) {
+
+function TodoForm({ initialFormData=DEFAULT_INITIAL_DATA, handleSave }) {
 
   const [formData, setFormData] = useState(initialFormData);
-  console.log("formData=", formData);
+  // console.log("formData=", formData);
 
   /** Update form input. */
   function handleChange(evt) {
     const fieldName = evt.target.name;
-    console.log("fieldName=", fieldName);
+    // console.log("fieldName=", fieldName);
     const value = evt.target.value;
-    console.log("value=", value);
+    // console.log("value=", value);
 
     setFormData(currData => {
       currData[fieldName] = value;
@@ -36,8 +38,14 @@ function TodoForm({ initialFormData, handleSave }) {
   /** Call parent function and clear form. */
   function handleSubmit(evt) {
     evt.preventDefault();
-    handleSave(formData);
-    setFormData({ title: "", description: "" });
+    const newTodo = {
+      title: formData.title,
+      description: formData.description,
+      priority: Number(formData.priority)
+    }
+
+    handleSave(newTodo);
+    setFormData({ title: "", description: "", priority: 1 });
   }
 
   return (
@@ -49,7 +57,7 @@ function TodoForm({ initialFormData, handleSave }) {
           className="form-control"
           placeholder="Title"
           onChange={handleChange}
-          value={formData.title || ""}
+          value={formData.title}
           aria-label="Title"
         />
       </div>
@@ -60,7 +68,7 @@ function TodoForm({ initialFormData, handleSave }) {
           className="form-control TodoForm-description"
           placeholder="Description"
           onChange={handleChange}
-          value={initialFormData?.description || ""}
+          value={formData.description}
           aria-label="Description"
         />
       </div>
@@ -72,7 +80,7 @@ function TodoForm({ initialFormData, handleSave }) {
           </label>
           <select id="TodoForm-priority"
             name="priority"
-            value={initialFormData?.priority || ""}
+            value={formData.priority}
             onChange={handleChange}
             className=
             "form-control form-control-sm d-inline-flex TodoForm-priority"
