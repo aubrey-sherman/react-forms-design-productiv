@@ -6,12 +6,13 @@
  * { EditableTodo, TopTodo } -> Todo
  **/
 
-function Todo({ id, title, description, priority}) {
+function Todo({ todo }) {
+  //console.log("Todo has=", { todo });
   return (
-      <div className="Todo" id={id}>
-        <div><b>{title}</b> <small>(priority: {priority})</small></div>
-        <div><small>{description}</small></div>
-      </div>
+    <div className="Todo" id={todo.id}>
+      <div><b>{todo.title}</b> <small>(priority: {todo.priority})</small></div>
+      <div><small>{todo.description}</small></div>
+    </div>
   );
 }
 
