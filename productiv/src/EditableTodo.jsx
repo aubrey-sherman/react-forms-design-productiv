@@ -17,6 +17,8 @@ import TodoForm from "./TodoForm.jsx";
 
 function EditableTodo({ todo, update, remove }) {
   const [isEditing, setIsEditing] = useState(false);
+  console.log("isEditing=", isEditing);
+  console.log("todo=", todo);
 
   /** Toggle if this is being edited */
   function toggleEdit() {
@@ -30,35 +32,34 @@ function EditableTodo({ todo, update, remove }) {
 
   /** Edit form saved; toggle isEditing and update in ancestor. */
   function handleSave(formData) {
-    const updatedTodo = {id: todo.id, ...formData};
+    const updatedTodo = { id: todo.id, ...formData };
     update(updatedTodo);
   }
 
-  // NOTE: Two options could be pulled up into functions for readability
-
+  // NOTE: Refactoring opp: options could be put in funcs for readability
   //FIXME: todo data not displaying properly, edit not working properly
   return (
     <div className="EditableTodo">
       {isEditing
-      ? <TodoForm handleSave={handleSave} initialFormData={todo}/>
-      :(
-      <div className="mb-3">
-        <div className="float-end text-sm-end">
-          <button
-            className="EditableTodo-toggle btn-link btn btn-sm"
-            onClick={toggleEdit}>
-            Edit
-          </button>
-          <button
-            className="EditableTodo-delBtn btn-link btn btn-sm text-danger"
-            onClick={handleDelete}>
-            Del
-          </button>
-        </div>
-        <Todo todo={todo}/>
-      </div>
-      )
-    }
+        ? <TodoForm handleSave={handleSave} initialFormData={todo} />
+        : (
+          <div className="mb-3">
+            <div className="float-end text-sm-end">
+              <button
+                className="EditableTodo-toggle btn-link btn btn-sm"
+                onClick={toggleEdit}>
+                Edit
+              </button>
+              <button
+                className="EditableTodo-delBtn btn-link btn btn-sm text-danger"
+                onClick={handleDelete}>
+                Del
+              </button>
+            </div>
+            <Todo todo={todo} />
+          </div>
+        )
+      }
     </div>
   );
 }
