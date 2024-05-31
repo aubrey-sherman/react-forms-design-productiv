@@ -17,6 +17,7 @@ import TopTodo from "./TopTodo.jsx";
 
 function TodoApp({ initialTodos }) {
   const [todos, setTodos] = useState(initialTodos);
+  console.log("todos=", todos);
 
   /** add a new todo to list */
   function create(todo) {
@@ -28,7 +29,7 @@ function TodoApp({ initialTodos }) {
   function update(updatedTodo) {
     // {id, title, description, priority }
     const updatedTodoList = todos.map(todo => {
-      if(todo.id === updatedTodo.id){
+      if (todo.id === updatedTodo.id) {
         todo.title = updatedTodo.title;
         todo.description = updatedTodo.description;
         todo.priority = updatedTodo.priority;
@@ -49,7 +50,7 @@ function TodoApp({ initialTodos }) {
         <div className="col-md-6">
           <h3 className="mb-3">Todos</h3>
           {todos.length > 0
-            ? <EditableTodoList todos={todos} update={update} remove={remove}/>
+            ? <EditableTodoList todos={todos} update={update} remove={remove} />
             : <span className="text-muted">You have no todos.</span>
           }
         </div>
@@ -66,7 +67,7 @@ function TodoApp({ initialTodos }) {
 
           <section>
             <h3 className="mb-3">Add Nü</h3>
-            <TodoForm handleSave={create}/>
+            <TodoForm handleSave={create} />
           </section>
         </div>
       </div>
