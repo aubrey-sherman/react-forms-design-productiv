@@ -30,15 +30,17 @@ function EditableTodo({ todo, update, remove }) {
 
   /** Edit form saved; toggle isEditing and update in ancestor. */
   function handleSave(formData) {
-    const updatedTodo = formData;
+    const updatedTodo = {id: todo.id, ...formData};
     update(updatedTodo);
   }
 
+  // NOTE: Two options could be pulled up into functions for readability
+
+  //FIXME: todo data not displaying properly, edit not working properly
   return (
     <div className="EditableTodo">
-      // NOTE: Two options could be pulled up into functions for readability
-      (isEditing
-      ? <TodoForm />
+      {isEditing
+      ? <TodoForm handleSave={handleSave} initialFormData={todo}/>
       :(
       <div className="mb-3">
         <div className="float-end text-sm-end">
@@ -53,10 +55,10 @@ function EditableTodo({ todo, update, remove }) {
             Del
           </button>
         </div>
-        <Todo />
+        <Todo todo={todo}/>
       </div>
       )
-      )
+    }
     </div>
   );
 }
