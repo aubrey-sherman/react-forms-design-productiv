@@ -25,11 +25,16 @@ function TodoApp({ initialTodos }) {
   }
 
   /** update a todo with updatedTodo */
+  // FIXME: Write this function.
   function update(updatedTodo) {
+
+
   }
 
   /** delete a todo by id */
   function remove(id) {
+    let updatedTodoList = todos.filter(todo => todo.id !== id);
+    setTodos(updatedTodoList);
   }
 
   return (
@@ -45,7 +50,7 @@ function TodoApp({ initialTodos }) {
           (if no top todo, omit this whole section)
           <section className="mb-4">
             <h3>Top Todo</h3>
-            <TopTodo todos={todos}/>
+            <TopTodo todos={todos} />
           </section>
 
           <section>
